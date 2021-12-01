@@ -1,0 +1,51 @@
+{
+  "name": "energy-api",
+  "version": "1.0.0",
+  "description": "Energy API",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "nodemon src/app",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint .",
+    "format": "prettier --check src/*",
+    "prepare": "cd ../ && husky install server/.husky"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "express-validator": "^6.13.0",
+    "lodash": "^4.17.21",
+    "method-override": "^3.0.0",
+    "mongoose": "^6.1.1",
+    "nodemon": "^2.0.15",
+    "pg": "^8.7.1",
+    "pg-hstore": "^2.3.4",
+    "prettier": "^2.5.1",
+    "sequelize": "^6.12.0-beta.1"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^15.0.0",
+    "@commitlint/config-conventional": "^15.0.0",
+    "@types/node": "^16.11.12",
+    "eslint": "^8.4.1",
+    "husky": "^7.0.4"
+  },
+  "lint-staged": {
+    "*.js": [
+      "prettier --single-quote --write",
+      "eslint --fix"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sinanaksu/energy-api.git"
+  },
+  "author": "Sinan Aksu <sinanaksu@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sinanaksu/energy-api/issues"
+  },
+  "homepage": "https://github.com/sinanaksu/energy-api#readme"
+}
