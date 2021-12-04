@@ -8,6 +8,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 require("./utils/mongodb");
+require("./routes/user.route")(app);
 
 const server = app.listen(5000);
 
