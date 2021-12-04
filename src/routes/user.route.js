@@ -7,6 +7,7 @@ const {
 } = require("../middlewares/validation");
 
 module.exports = (app) => {
+  router.post("/login", isEmail, isPassword, user.login);
   router.post("/register", isEmail, isUsername, isPassword, user.register);
   app.use("/v1/user", router);
 };
