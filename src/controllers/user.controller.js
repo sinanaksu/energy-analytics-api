@@ -5,6 +5,19 @@ const config = require("../utils/config");
 
 // User Register Controller
 exports.register = async (req, res) => {
+  await User.findOne({
+    email: req.body.email,
+  }).exec((err, user) => {
+    if (err) {
+      res.status(500).send({ message: err });
+      return;
+    }
+    if (user) {
+      res.status(404).send({ error: "USER_FOUND" });
+      return;
+    }
+  });
+
   const data = req.body;
   data.password = bcrypt.hashSync(data.password, 8);
 
@@ -29,7 +42,8 @@ exports.login = async (req, res) => {
     }
 
     if (!user) {
-      return res.status(404).send({ error: "USER_NOT_FOUND" });
+      res.status(404).send({ error: "USER_NOT_FOUND" });
+      return;
     }
 
     const passwordIsValid = bcrypt.compareSync(
@@ -38,10 +52,11 @@ exports.login = async (req, res) => {
     );
 
     if (!passwordIsValid) {
-      return res.status(401).send({
+      res.status(401).send({
         accessToken: null,
         error: "USER_NOT_FOUND",
       });
+      return;
     }
 
     const token = jwt.sign({ id: user._id }, config.SECRET, {
@@ -59,12 +74,12 @@ exports.login = async (req, res) => {
 
 // User Info Controller
 exports.me = async (req, res) => {
-    await User.findById(req.body.userId)
-        .then((user) => {
-            user.password = undefined;
-            res.json(user);
-        })
-        .catch((err) => {
-            res.status(500).send(err);
-        });
+  await User.findById(req.body.userId)
+    .then((user) => {
+      user.password = undefined;
+      res.json(user);
+    })
+    .catch((err) => {
+      res.status(500).send(err);
+    });
 };
