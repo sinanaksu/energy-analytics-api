@@ -7,6 +7,8 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+require("./utils/mongodb");
+
 const server = app.listen(5000);
 
 module.exports = server;
