@@ -56,3 +56,15 @@ exports.login = async (req, res) => {
     });
   });
 };
+
+// User Info Controller
+exports.me = async (req, res) => {
+    await User.findById(req.body.userId)
+        .then((user) => {
+            user.password = undefined;
+            res.json(user);
+        })
+        .catch((err) => {
+            res.status(500).send(err);
+        });
+};
