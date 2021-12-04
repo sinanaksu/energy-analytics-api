@@ -16,19 +16,19 @@ exports.register = async (req, res) => {
       res.status(404).send({ error: "USER_FOUND" });
       return;
     }
+
+    const data = req.body;
+    data.password = bcrypt.hashSync(data.password, 8);
+
+    User.create(data)
+      .then((user) => {
+        user.password = undefined;
+        res.json(user);
+      })
+      .catch((err) => {
+        res.status(500).send(err);
+      });
   });
-
-  const data = req.body;
-  data.password = bcrypt.hashSync(data.password, 8);
-
-  await User.create(data)
-    .then((user) => {
-      user.password = undefined;
-      res.json(user);
-    })
-    .catch((err) => {
-      res.status(500).send(err);
-    });
 };
 
 // User Login Controller
