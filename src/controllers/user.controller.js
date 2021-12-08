@@ -9,11 +9,11 @@ exports.register = async (req, res) => {
     email: req.body.email,
   }).exec((err, user) => {
     if (err) {
-      res.status(500).send({ message: err });
+      res.status(200).send({ error: err });
       return;
     }
     if (user) {
-      res.status(404).send({ error: "USER_FOUND" });
+      res.status(200).send({ error: "USER_FOUND" });
       return;
     }
 
@@ -26,7 +26,7 @@ exports.register = async (req, res) => {
         res.json(user);
       })
       .catch((err) => {
-        res.status(500).send(err);
+        res.status(200).send(err);
       });
   });
 };
@@ -37,12 +37,12 @@ exports.login = async (req, res) => {
     email: req.body.email,
   }).exec((err, user) => {
     if (err) {
-      res.status(500).send({ error: err });
+      res.status(200).send({ error: err });
       return;
     }
 
     if (!user) {
-      res.status(404).send({ error: "USER_NOT_FOUND" });
+      res.status(200).send({ error: "USER_NOT_FOUND" });
       return;
     }
 
@@ -52,7 +52,7 @@ exports.login = async (req, res) => {
     );
 
     if (!passwordIsValid) {
-      res.status(401).send({
+      res.status(200).send({
         accessToken: null,
         error: "USER_NOT_FOUND",
       });
