@@ -11,6 +11,7 @@ app.use(express.urlencoded({ extended: true }));
 require("./utils/mongodb");
 require("./routes/user.route")(app);
 require("./routes/facility.route")(app);
+require("./routes/analytics.route")(app);
 
 const server = app.listen(5000);
 
