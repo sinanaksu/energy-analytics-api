@@ -6,5 +6,6 @@ module.exports = (app) => {
   router.get("/day/", verifyToken, analytics.usage);
   router.get("/heatmap/", analytics.heatmap);
   router.get("/series/phases/", analytics.phases);
+  router.get("/series/frequency/", analytics.frequency);
   app.use("/v1/analytics", router);
 };
