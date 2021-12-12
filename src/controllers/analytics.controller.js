@@ -62,3 +62,44 @@ exports.heatmap = async (req, res) => {
   }
   res.json(daysOfYear);
 };
+
+exports.phases = async (req, res) => {
+  const now = new Date();
+  var daysOfYear = [];
+  for (var f = 1; f < 4; f++) {
+    var phases = [];
+    for (var h = 0; h < now.getHours()+1; h++) {
+      var kw = 0;
+      if (h <= 8) {
+        kw = _.random(200, 230);
+      }
+      if (h > 8 && h <= 10) {
+        kw = _.random(230, 280);
+      }
+      if (h > 10 && h <= 12) {
+        kw = _.random(280, 300);
+      }
+      if (h > 12 && h <= 14) {
+        kw = _.random(300, 320);
+      }
+      if (h > 14 && h <= 16) {
+        kw = _.random(320, 340);
+      }
+      if (h > 16 && h <= 18) {
+        kw = _.random(320, 300);
+      }
+      if (h > 18 && h <= 20) {
+        kw = _.random(230, 280);
+      }
+      if (h > 20) {
+        kw = _.random(200, 230);
+      }
+      phases.push(kw);
+    }
+    daysOfYear.push({
+      name: "Faz " + f,
+      data: phases,
+    });
+  }
+  res.json(daysOfYear);
+};
