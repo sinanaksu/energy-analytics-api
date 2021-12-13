@@ -103,3 +103,19 @@ exports.phases = async (req, res) => {
   }
   res.json(daysOfYear);
 };
+
+exports.frequency = async (req, res) => {
+  const now = new Date();
+  var daysOfYear = [];
+  var frequency = [];
+  for (var h = 0; h < now.getHours()+1; h++) {
+    var kw = 0;
+    kw = _.random(49,51);
+    frequency.push(kw);
+  }
+  daysOfYear.push({
+    name: "Hz",
+    data: frequency,
+  });
+  res.json(daysOfYear);
+};
